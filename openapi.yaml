@@ -3,14 +3,14 @@ info:
   title: ExtraerIntencionYDatos
   description: MCP extractor de intención y datos desde lenguaje natural en español
   version: 1.0.0
-host: TU-SERVIDOR-PUBLICO.com
+host: intent-extractor.onrender.com
 basePath: /
 schemes:
   - https
 paths:
   /mcp:
     post:
-      summary: Extraer intención y dato
+      summary: Extraer intención y dato desde texto
       x-ms-agentic-protocol: mcp-streamable-1.0
       operationId: extraerIntencionYDato
       consumes:
@@ -26,7 +26,7 @@ paths:
             properties:
               prompt:
                 type: string
-                description: Texto en lenguaje natural
+                description: Texto en lenguaje natural del usuario
       responses:
         200:
           description: Resultado de la extracción
