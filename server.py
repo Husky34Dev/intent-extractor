@@ -41,8 +41,5 @@ def extraer(mensaje: PromptInput):
         "valor_dato": valor_dato
     }
 
-# Crear el servidor MCP
-mcp = FastApiMCP(app)
-
-# Montar manualmente en /mcp
-app.mount("/mcp", mcp.app)
+# Esto registra automáticamente los endpoints MCP en /mcp/*
+FastApiMCP(app)
