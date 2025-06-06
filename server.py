@@ -6,22 +6,18 @@ from fastapi_mcp import FastApiMCP
 
 app = FastAPI()
 
-# Entrada del usuario
 class MensajeInput(BaseModel):
     mensaje: str
 
-# Salida individual por fila
 class FilaResultado(BaseModel):
     intencion: str
     tipo_dato: str
     valor_dato: str
 
-# Estructura de respuesta completa
 class ResultadoFinal(BaseModel):
     event: str
     data: List[FilaResultado]
 
-# Endpoint principal
 @app.post("/extraer", response_model=ResultadoFinal, operation_id="extraer_datos")
 def extraer_datos(mensaje: MensajeInput):
     texto = mensaje.mensaje.lower().strip()
@@ -90,13 +86,7 @@ def extraer_datos(mensaje: MensajeInput):
         ]
     }
 
-# MCP: exponer como herramienta compatible
-mcp = FastApiMCP(
-    app,
-    name="Extractor de intención",
-    description="Extrae intención y datos desde texto libre",
-    include_operations=["extraer_datos"],  # fuerza a exponer este endpoint
-    describe_all_responses=True,
-    describe_full_response_schema=True
-)
+# REGISTRO DE MCP (debe ir después de los endpoints)
+mcp = FastApiMCP(app, name="Extractor", description="Extrae intención desde lenguaje natural")
 mcp.mount()
+mcp.setup_server()  # ← ¡esto garantiza que registre los endpoints declarados antes!
