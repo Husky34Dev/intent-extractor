@@ -43,4 +43,4 @@ def extraer(mensaje: PromptInput):
 
 # MCP server registration
 mcp = FastApiMCP(app)
-mcp.mount()
+mcp.mount(path="/mcp")
