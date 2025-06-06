@@ -89,4 +89,4 @@ def extraer_datos(mensaje: MensajeInput):
 # REGISTRO DE MCP (debe ir después de los endpoints)
 mcp = FastApiMCP(app, name="Extractor", description="Extrae intención desde lenguaje natural")
 mcp.mount()
-mcp.setup_server()  # ← ¡esto garantiza que registre los endpoints declarados antes!
+mcp.setup_server()  # ← esto garantiza que registre los endpoints declarados antes
